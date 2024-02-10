@@ -19,6 +19,7 @@ export class RoomsComponent implements OnInit{
   }
 
   toggle() {
+    console.log("Toggle called");
     this.hideRooms = !this.hideRooms;
   }
 
