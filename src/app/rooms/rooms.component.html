@@ -5,8 +5,24 @@
     <div [innerText]="numberOfRooms"></div>
 </div>
 
-<div *ngIf="roomInfo?.availableRooms">
+<div *ngIf="roomInfo.availableRooms > 0">
     Rooms List
+    <table>
+        <tr>
+            <th>Room Number</th>
+            <th>Room Type</th>
+            <th>Price</th>
+            <th>Amenities</th>
+            <th>Check-in Time</th>
+        </tr>
+        <tr *ngFor="let room of roomList">
+            <td>{{room.roomNumber}}</td>
+            <td>{{room.roomType }}</td>
+            <td>${{room.price}}/night</td>
+            <td>{{room.amenities}}</td>
+            <td>{{room.checkInTime}}</td>
+        </tr>
+    </table>
 </div>
 
 <button (click)="toggle()">Toggle</button>
