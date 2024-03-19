@@ -4,7 +4,7 @@ import { RoomConfig, RoomInfo } from './room';
 @Component({
   selector: 'hotelinvapp-rooms',
   templateUrl: './rooms.component.html',
-  styleUrl: './rooms.component.css'
+  styleUrl: './rooms.component.scss'
 })
 export class RoomsComponent implements OnInit{
   constructor() {}
