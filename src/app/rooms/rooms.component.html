@@ -7,23 +7,7 @@
 </div>
 
 <div *ngIf="roomInfo.availableRooms > 0">
-    Rooms List
-    <table>
-        <tr>
-            <th>Room Number</th>
-            <th>Room Type</th>
-            <th>Price</th>
-            <th>Amenities</th>
-            <th>Check-in Time</th>
-        </tr>
-        <tr *ngFor="let room of roomList; let e = even; let o = odd" [ngClass]="e ? 'even' : 'odd'">
-            <td>{{room.roomNumber}}</td>
-            <td>{{room.roomType | titlecase}}</td>
-            <td>{{room.price | currency: 'KES'}}/night</td>
-            <td>{{room.amenities}}</td>
-            <td>{{room.checkInTime | date}}</td>
-        </tr>
-    </table>
+    <hotelinvapp-rooms-list [rooms]="roomList" (selectedRoom)="selectRoom($event)"></hotelinvapp-rooms-list>
 </div>
 
 <button (click)="toggle()">Toggle</button>
