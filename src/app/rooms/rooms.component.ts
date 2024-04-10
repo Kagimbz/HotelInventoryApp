@@ -62,4 +62,7 @@ export class RoomsComponent implements OnInit{
     }
   ]
 
+  selectRoom(room: RoomConfig) {
+    console.log(`Selected room number ${room.roomNumber}`);
+  }
 }
