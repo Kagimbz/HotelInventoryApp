@@ -1,3 +1,4 @@
+<hotelinvapp-header></hotelinvapp-header>
 <h2>Welcome to {{hotelName}}!</h2>
 
 <div [hidden]="hideRooms">
@@ -7,7 +8,13 @@
 </div>
 
 <div *ngIf="roomInfo.availableRooms > 0">
-    <hotelinvapp-rooms-list [rooms]="roomList" (selectedRoom)="selectRoom($event)"></hotelinvapp-rooms-list>
+    <hotelinvapp-rooms-list [rooms]="roomList" [title]="title" 
+       (selectedRoom)="selectRoom($event)">
+    </hotelinvapp-rooms-list>
+</div>
+
+<div>
+    <button (click)="addRoom()">Add Room</button>
 </div>
 
 <button (click)="toggle()">Toggle</button>
