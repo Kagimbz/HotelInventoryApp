@@ -7,7 +7,7 @@
     </div>
 </div>
 
-<div *ngIf="roomInfo.availableRooms > 0">
+<div *ngIf="!hideRooms">
     <hotelinvapp-rooms-list [rooms]="roomList" [title]="title" 
        (selectedRoom)="selectRoom($event)">
     </hotelinvapp-rooms-list>
