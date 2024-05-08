@@ -13,10 +13,10 @@ export class AppComponent implements AfterViewInit {
   constructor() {}
 
   ngAfterViewInit(): void {
-    const component = this.vcr.createComponent(RoomsComponent);
-    component.instance.numberOfRooms = 20;
+    const component = this.vcr?.createComponent(RoomsComponent);
+    // component.instance.numberOfRooms = 20;
 
-    this.divRef.nativeElement.innerText = "Hello From Down Here";
+    // this.divRef.nativeElement.innerText = "Hello From Down Here";
   }
   title = 'hotelinventoryapp';
 }
