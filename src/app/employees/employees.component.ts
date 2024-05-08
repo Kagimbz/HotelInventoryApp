@@ -1,17 +1,17 @@
-import { AfterContentInit, Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, Host, OnInit, Self } from '@angular/core';
+import { RoomsService } from '../rooms/services/rooms.service';
 
 @Component({
   selector: 'hotelinvapp-employees',
   templateUrl: './employees.component.html',
-  styleUrl: './employees.component.scss'
+  styleUrl: './employees.component.scss',
+  providers: [RoomsService]
 })
 export class EmployeesComponent implements OnInit{
   empName: string = 'John';
 
-  constructor() {}
+  constructor(@Host() private roomsService: RoomsService) {}
 
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+  ngOnInit(): void {}
 
 }
