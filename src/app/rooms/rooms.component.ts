@@ -1,7 +1,9 @@
-import { AfterViewChecked, AfterViewInit, Component, OnInit, QueryList, SkipSelf, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, Inject, OnInit, QueryList, SkipSelf, ViewChild, ViewChildren } from '@angular/core';
 import { RoomConfig, RoomInfo } from './room';
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
+import { APP_CONFIG_TOKEN, AppConfig } from '../app_config/appconfig.service';
+import { LOCAL_STORAGE_TOKEN } from '../localstorage.token';
 
 @Component({
   selector: 'hotelinvapp-rooms',
@@ -11,7 +13,11 @@ import { RoomsService } from './services/rooms.service';
 export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked{
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent
 
-  constructor(@SkipSelf() private roomsService: RoomsService) {}
+  constructor(@SkipSelf() private roomsService: RoomsService, 
+  @Inject(APP_CONFIG_TOKEN) private appConfigToken: AppConfig, 
+  @Inject(LOCAL_STORAGE_TOKEN) private localStorageToken: Storage) {
+    console.log(appConfigToken.apiUrl);
+  }
 
   hotelName: string = "Hilton Hotel";
 
@@ -23,6 +29,8 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked{
 
   ngOnInit(): void {
     console.log(`Rooms Component Ts ngOnInit`);
+
+    this.localStorageToken.setItem('name', 'Hilton Hotel');
   }
 
   ngAfterViewInit(): void {}

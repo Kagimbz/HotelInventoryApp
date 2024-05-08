@@ -9,6 +9,8 @@ import { RoomsListComponent } from './rooms/rooms-list/rooms-list.component';
 import { HeaderComponent } from './header/header.component';
 import { ContainerComponent } from './container/container.component';
 import { EmployeesComponent } from './employees/employees.component';
+import { APP_CONFIG, APP_CONFIG_TOKEN } from './app_config/appconfig.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,9 +24,13 @@ import { EmployeesComponent } from './employees/employees.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide: APP_CONFIG_TOKEN,
+    useValue: APP_CONFIG
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
