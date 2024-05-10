@@ -19,6 +19,8 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked{
     console.log(appConfigToken.apiUrl);
   }
 
+  roomList! : RoomConfig[]
+
   hotelName: string = "Hilton Hotel";
 
   numberOfRooms: number = 10;
@@ -31,6 +33,10 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked{
     console.log(`Rooms Component Ts ngOnInit`);
 
     this.localStorageToken.setItem('name', 'Hilton Hotel');
+
+    this.roomsService.getRooms().subscribe(rooms => {
+      this.roomList = rooms
+    })
   }
 
   ngAfterViewInit(): void {}
@@ -53,7 +59,7 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked{
   }
 
 
-  roomList : RoomConfig[] = this.roomsService.getRooms();
+  // roomList : RoomConfig[] = this.roomsService.getRooms();
 
   selectRoom(room: RoomConfig) {
     console.log(`Selected room number ${room.roomNumber}`);
