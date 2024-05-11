@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RoomConfig } from '../room';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +42,20 @@ export class RoomsService {
    }
 
   getRooms() {
-    return this.http.get<RoomConfig[]>('/api/v1/hotel-inventory/get');
+    return this.http.get<RoomConfig[]>('/api/v1/hotel-inventory');
+  }
+
+  addRoom(room: RoomConfig) {
+    return this.http.post('/api/v1/hotel-inventory', room);
+  }
+
+  updateRoom(room: RoomConfig) {
+    return this.http.put('/api/v1/hotel-inventory', room);
+  }
+
+  deleteRoom(roomNumber: number) {
+    const params = new HttpParams().set('roomNumber', roomNumber);
+
+    return this.http.delete('/api/v1/hotel-inventory', {params});
   }
 }
