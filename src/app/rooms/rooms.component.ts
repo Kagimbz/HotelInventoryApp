@@ -65,17 +65,41 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked{
     console.log(`Selected room number ${room.roomNumber}`);
   }
 
-  addRoom() {
-    const newRoom: RoomConfig = {
-      roomNumber: 4,
-      roomType: "New Room",
-      amenities: "Air Conditioner, TV, Kitchen, Free Wi-Fi",
-      price: 300.50,
-      photos: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGhvdGVsfGVufDB8fDB8fHww",
-      checkInTime: new Date('23-Apr-2024'),
-      checkOutTime: new Date('24-Apr-2024')
-    }
+  // addRoom() {
+  //   const newRoom: RoomConfig = {
+  //     roomNumber: 4,
+  //     roomType: "New Room",
+  //     amenities: "Air Conditioner, TV, Kitchen, Free Wi-Fi",
+  //     price: 300.50,
+  //     photos: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGhvdGVsfGVufDB8fDB8fHww",
+  //     checkInTime: new Date('23-Apr-2024'),
+  //     checkOutTime: new Date('24-Apr-2024')
+  //   }
 
-    this.roomList = [...this.roomList, newRoom];
+  //   this.roomList = [...this.roomList, newRoom];
+  // }
+
+  newRoom: RoomConfig = {
+    roomNumber: 4,
+    roomType: "New Room",
+    amenities: "Air Conditioner, TV, Kitchen, Free Wi-Fi, Twin Beds",
+    price: 300.50,
+    photos: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGhvdGVsfGVufDB8fDB8fHww",
+    checkInTime: new Date('23-Apr-2024'),
+    checkOutTime: new Date('24-Apr-2024')
+  }
+  
+  addRoom() {    
+    this.roomsService.addRoom(this.newRoom).subscribe({
+      error: (err: any) => console.log(err)
+    })
+  }
+
+  updateRoom() {
+    this.roomsService.updateRoom(this.newRoom).subscribe();
+  }
+
+  deleteRoom() {    
+    this.roomsService.deleteRoom(this.newRoom.roomNumber).subscribe();
   }
 }
