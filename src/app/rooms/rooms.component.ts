@@ -34,7 +34,7 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked{
 
     this.localStorageToken.setItem('name', 'Hilton Hotel');
 
-    this.roomsService.getRooms().subscribe(rooms => {
+    this.roomsService.rooms$.subscribe(rooms => {
       this.roomList = rooms
     })
   }
