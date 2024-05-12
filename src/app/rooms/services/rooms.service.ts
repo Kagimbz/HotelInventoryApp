@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import { RoomConfig } from '../room';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoomsService {
+
+  rooms$ = this.http.get<RoomConfig[]>('/api/v1/hotel-inventory').pipe(
+    shareReplay(1)
+  );
 
   // roomList : RoomConfig[] = [
   //   {
