@@ -7,8 +7,16 @@
     </div>
 </div>
 
-<div *ngIf="!hideRooms">
-    <hotelinvapp-rooms-list [rooms]="roomList" [title]="title" 
+<div *ngIf="errorAsObservable$ | async as error">
+    {{ error }}
+</div>
+
+<div *ngIf="roomCount$ | async as roomCount">
+    Number of rooms: {{ roomCount }}
+</div>
+
+<div *ngIf="rooms$ | async as rooms">
+    <hotelinvapp-rooms-list [rooms]="rooms" [title]="title" 
        (selectedRoom)="selectRoom($event)">
     </hotelinvapp-rooms-list>
 </div>

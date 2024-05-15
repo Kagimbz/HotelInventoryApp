@@ -1,16 +1,17 @@
-import { AfterViewChecked, AfterViewInit, Component, Inject, OnInit, QueryList, SkipSelf, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, Inject, OnDestroy, OnInit, QueryList, SkipSelf, ViewChild, ViewChildren } from '@angular/core';
 import { RoomConfig, RoomInfo } from './room';
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
 import { APP_CONFIG_TOKEN, AppConfig } from '../app_config/appconfig.service';
 import { LOCAL_STORAGE_TOKEN } from '../localstorage.token';
+import { Subject, Subscription, catchError, map, of } from 'rxjs';
 
 @Component({
   selector: 'hotelinvapp-rooms',
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.scss'
 })
-export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked{
+export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy{
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent
 
   constructor(@SkipSelf() private roomsService: RoomsService, 
@@ -19,7 +20,23 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked{
     console.log(appConfigToken.apiUrl);
   }
 
+  subscription! : Subscription;
+
   roomList! : RoomConfig[]
+
+  error$ = new Subject<string>();
+  errorAsObservable$ = this.error$.asObservable();
+
+  rooms$ = this.roomsService.rooms$.pipe(
+    catchError((err) => {
+      this.error$.next(err.message);
+      return of([]);
+    })
+  );
+
+  roomCount$ = this.roomsService.rooms$.pipe(
+    map((rooms) => rooms.length)
+  );
 
   hotelName: string = "Hilton Hotel";
 
@@ -34,9 +51,9 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked{
 
     this.localStorageToken.setItem('name', 'Hilton Hotel');
 
-    this.roomsService.rooms$.subscribe(rooms => {
-      this.roomList = rooms
-    })
+    // this.subscription = this.roomsService.rooms$.subscribe(rooms => {
+    //   this.roomList = rooms
+    // })
   }
 
   ngAfterViewInit(): void {}
@@ -101,5 +118,11 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked{
 
   deleteRoom() {    
     this.roomsService.deleteRoom(this.newRoom.roomNumber).subscribe();
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
