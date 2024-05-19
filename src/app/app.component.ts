@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { RoomsComponent } from './rooms/rooms.component';
+import { InitService } from './init.service';
 
 @Component({
   selector: 'hotelinvapp-root',
@@ -10,7 +11,10 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('component', {read: ViewContainerRef}) vcr!: ViewContainerRef;
   @ViewChild('div') divRef!: ElementRef;
 
-  constructor() {}
+  constructor(private initService : InitService) {
+    console.log(initService.config);
+    
+  }
 
   ngAfterViewInit(): void {
     const component = this.vcr?.createComponent(RoomsComponent);

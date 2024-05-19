@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RoomConfig } from '../room';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { shareReplay } from 'rxjs';
 
 @Injectable({
