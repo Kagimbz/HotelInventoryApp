@@ -64,3 +64,10 @@ export class RoomsService {
     return this.http.delete('/api/v1/hotel-inventory', {params});
   }
 }
+
+
+export interface EntityResponse {
+  message: number,
+  responseCode: number,
+  entity: any
+}
