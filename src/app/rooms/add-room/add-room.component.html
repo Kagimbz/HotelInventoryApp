@@ -2,7 +2,7 @@
      {{ successMessage }}
 </div>
 
-<form #addRoomForm="ngForm" (ngSubmit)="addRoom()">
+<form #addRoomForm="ngForm" (ngSubmit)="addRoom(addRoomForm)">
     <div class="form-group">
          <input required min="1" class="form-control" type="number" name="roomNumber" placeholder="Room Number" [(ngModel)]="room.roomNumber" />
     </div>
@@ -25,11 +25,11 @@
          <input required class="form-control" type="text" name="photos" placeholder="Photos" [(ngModel)]="room.photos" /> 
     </div>
     <div class="form-group">
-         <input required class="form-control" type="datetime" name="checkInTime"
+         <input class="form-control" type="datetime" name="checkInTime"
             placeholder="Check-in Time" [(ngModel)]="room.checkInTime" /> 
     </div>
     <div class="form-group">
-         <input required class="form-control" type="datetime" name="checkOutTime"
+         <input class="form-control" type="datetime" name="checkOutTime"
             placeholder="Check-out Time" [(ngModel)]="room.checkOutTime" />
     </div>
     <div>
