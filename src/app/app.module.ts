@@ -26,6 +26,7 @@ import { FormsModule } from '@angular/forms';
 import { AddRoomComponent } from './rooms/add-room/add-room.component';
 import { LoginComponent } from './login/login.component';
 import { HoverDirective } from './hover.directive';
+import { EmailvalidatorDirective } from './email_validator/emailvalidator.directive';
 
 function initFactory(initService : InitService) {
   return () => initService.init();
@@ -44,7 +45,8 @@ function initFactory(initService : InitService) {
     RoomBookingComponent,
     AddRoomComponent,
     LoginComponent,
-    HoverDirective
+    HoverDirective,
+    EmailvalidatorDirective
   ],
   imports: [
     BrowserModule,
