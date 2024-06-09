@@ -8,6 +8,7 @@ import { RoomBookingComponent } from './room-booking/room-booking.component';
 import { AddRoomComponent } from './add-room/add-room.component';
 import { FormsModule } from '@angular/forms';
 import { HeaderModule } from '../header/header.module';
+import { LINK_TOKEN, LINK_TOKEN_VALUE_2 } from '../services/link-config.service';
 
 
 @NgModule({
@@ -22,6 +23,12 @@ import { HeaderModule } from '../header/header.module';
     RoomsRoutingModule,
     FormsModule,
     HeaderModule
+  ],
+  providers: [
+    {
+      provide: LINK_TOKEN,
+      useValue: LINK_TOKEN_VALUE_2
+    }
   ]
 })
 export class RoomsModule { }
