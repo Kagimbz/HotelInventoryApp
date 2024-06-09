@@ -21,8 +21,10 @@
     </hotelinvapp-rooms-list>
 </div>
 
+<router-outlet/>
+
 <div>
-    <button (click)="addRoom()">Add Room</button>
+    <button routerLink="add">Add Room</button>
 </div>
 
 <button (click)="toggle()">Toggle</button>

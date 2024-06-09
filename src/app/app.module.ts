@@ -21,8 +21,8 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { HoverDirective } from './hover.directive';
 import { EmailvalidatorDirective } from './email_validator/emailvalidator.directive';
-import { RoomsModule } from './rooms/rooms.module';
 import { HeaderModule } from './header/header.module';
+import { LINK_TOKEN, LINK_TOKEN_VALUE_1 } from './services/link-config.service';
 
 function initFactory(initService : InitService) {
   return () => initService.init();
@@ -49,23 +49,30 @@ function initFactory(initService : InitService) {
     MatIconModule,
     MatListModule,
     FormsModule,
-    RoomsModule,
     HeaderModule,
     AppRoutingModule
   ],
-  providers: [{
-    provide: APP_CONFIG_TOKEN,
-    useValue: APP_CONFIG
-  },{
-    provide: HTTP_INTERCEPTORS,
-    useClass: RequestInterceptor,
-    multi: true
-  }, {
-    provide: APP_INITIALIZER,
-    useFactory: initFactory,
-    deps: [InitService],
-    multi: true
-  }, provideAnimationsAsync()],
+  providers: [
+    {
+      provide: APP_CONFIG_TOKEN,
+      useValue: APP_CONFIG
+    },
+    {
+      provide: LINK_TOKEN,
+      useValue: LINK_TOKEN_VALUE_1
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true
+    }, 
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initFactory,
+      deps: [InitService],
+      multi: true
+    }, provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

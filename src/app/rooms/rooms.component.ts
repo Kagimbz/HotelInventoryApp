@@ -5,6 +5,7 @@ import { RoomsService } from './services/rooms.service';
 import { APP_CONFIG_TOKEN, AppConfig } from '../app_config/appconfig.service';
 import { LOCAL_STORAGE_TOKEN } from '../localstorage.token';
 import { Subject, Subscription, catchError, map, of } from 'rxjs';
+import { ConfigService } from '../services/config.service';
 
 @Component({
   selector: 'hotelinvapp-rooms',
@@ -16,8 +17,10 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
 
   constructor(@SkipSelf() private roomsService: RoomsService, 
   @Inject(APP_CONFIG_TOKEN) private appConfigToken: AppConfig, 
-  @Inject(LOCAL_STORAGE_TOKEN) private localStorageToken: Storage) {
+  @Inject(LOCAL_STORAGE_TOKEN) private localStorageToken: Storage,
+  private configService: ConfigService) {
     console.log(appConfigToken.apiUrl);
+    console.log(configService);
   }
 
   subscription! : Subscription;
