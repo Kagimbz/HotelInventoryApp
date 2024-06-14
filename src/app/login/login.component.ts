@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'hotelinvapp-login',
@@ -8,15 +9,18 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private loginService: LoginService) { }
 
   email: string = '';
   password: string = '';
 
   login() {
-    if(this.email === 'admin@gmail.com' && this.password === 'Admin') {
+    this.loginService.login(this.email, this.password);
+
+    if(LoginService.isLoggedIn) {
       this.router.navigateByUrl('/rooms');
     }
+    
   }
 
 }
