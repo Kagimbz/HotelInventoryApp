@@ -1,1 +1,161 @@
-<p>booking works!</p>
+{{ bookingForm.value | json }}
+
+<!-- guestEmail: [''],
+      checkInDate: [''],
+      checkOutDate: [''],
+      bookingStatus: [''],
+      bookingAmt: [''],
+      bookingDate: [''],
+      guestMobileNo: [''],
+      guestName: [''],
+      guestAddress: [''],
+      guestCount: [''] -->
+<form [formGroup]="bookingForm" (ngSubmit)="addBooking()">
+    <mat-form-field>
+        <mat-label>Room Id</mat-label>
+        <input
+           type="text"
+           matInput
+           formControlName="roomId"
+           placeholder="Room Id"
+        />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Guest Name</mat-label>
+        <input
+           type="text"
+           matInput
+           formControlName="guestName"
+           placeholder="Name"
+        />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Guest Email</mat-label>
+        <input
+           type="email"
+           matInput
+           formControlName="guestEmail"
+           placeholder="Email"
+        />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Guest Mobile No.</mat-label>
+        <input
+           type="text"
+           matInput
+           formControlName="guestMobileNo"
+           placeholder="Mobile No."
+        />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Amount</mat-label>
+        <input
+           type="number"
+           matInput
+           formControlName="bookingAmt"
+           placeholder="Amount"
+        />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Check-in date</mat-label>
+        <input
+           matInput
+           [matDatepicker]="picker1"
+           formControlName="checkInDate"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Check-out date</mat-label>
+        <input
+           matInput
+           [matDatepicker]="picker2"
+           formControlName="checkOutDate"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Booking date</mat-label>
+        <input
+           matInput
+           [matDatepicker]="picker3"
+           formControlName="bookingDate"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+    </mat-form-field>
+    <div formGroupName="guestAddress">
+        <mat-accordion multi>
+            <mat-expansion-panel>
+
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Address</mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <mat-form-field>
+                    <mat-label>Postal Address</mat-label>
+                    <input
+                       type="text"
+                       matInput
+                       formControlName="postalAddress"
+                       placeholder="Postal Address"
+                    />
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Zip Code</mat-label>
+                    <input
+                       type="text"
+                       matInput
+                       formControlName="zipCode"
+                       placeholder="Zip Code"
+                    />
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>City</mat-label>
+                    <input
+                       type="text"
+                       matInput
+                       formControlName="city"
+                       placeholder="City"
+                    />
+                </mat-form-field>
+
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <div formArrayName="guests">
+        <div *ngFor="let guest of guests.controls; let i = index">
+            <div [formGroupName]="i">
+                <mat-form-field>
+                    <mat-label>Guest Name</mat-label>
+                    <input
+                       type="text"
+                       matInput
+                       formControlName="guestName"
+                       placeholder="Guest Name"
+                    />
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Age</mat-label>
+                    <input
+                       type="number"
+                       matInput
+                       formControlName="age"
+                       placeholder="Age"
+                    />
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button mat-raised-button color="primary" type="button" (click)="addGuest()">Add Guest</button>
+    </div>
+    <div>
+        <button mat-raised-button color="primary">Book Room</button>
+    </div>
+</form>
