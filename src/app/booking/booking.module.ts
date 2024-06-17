@@ -11,6 +11,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatDatepickerModule,
     MatButtonModule,
     MatExpansionModule,
-    MatIconModule
+    MatIconModule,
+    MatCheckboxModule
   ],
   providers: [
     provideNativeDateAdapter()

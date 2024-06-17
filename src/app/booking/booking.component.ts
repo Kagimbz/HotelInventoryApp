@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../services/config.service';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'hotelinvapp-booking',
@@ -21,30 +21,72 @@ export class BookingComponent implements OnInit {
 
   ngOnInit(): void {
     this.bookingForm = this.formBuilder.group({
-      roomId: new FormControl({value: '2', disabled: true}),
-      guestEmail: [''],
+      roomId: new FormControl({value: '2', disabled: true}, {validators: [Validators.required]}),
+      guestEmail: ['', [Validators.required, Validators.email]],
       checkInDate: [''],
       checkOutDate: [''],
       bookingStatus: [''],
       bookingAmt: [''],
       bookingDate: [''],
       guestMobileNo: [''],
-      guestName: [''],
+      guestName: ['', [Validators.required, Validators.minLength(5)]],
       guestAddress: this.formBuilder.group({
-        postalAddress: [''],
+        postalAddress: ['', [Validators.required]],
         zipCode: [''],
         city: ['']
       }),
       guests: this.formBuilder.array([this.formBuilder.group({
-        guestName: [''],
+        guestName: ['', [Validators.required]],
         age: ['']
-      })])
+      })]),
+      tnc: new FormControl(false, {validators: Validators.requiredTrue})
+    })
+
+    this.getFormData();
+  }
+
+  getFormData() {
+    this.bookingForm.setValue({
+      roomId: '2',
+      guestEmail: 'testemail@gmail.com',
+      checkInDate: '',
+      checkOutDate: '',
+      bookingStatus: '',
+      bookingAmt: '',
+      bookingDate: '',
+      guestMobileNo: '',
+      guestName: 'Halima',
+      guestAddress: {
+        postalAddress: '010101-101',
+        zipCode: '',
+        city: ''
+      },
+      guests: [],
+      tnc: false
     })
   }
 
 
   addBooking() {
     console.log(this.bookingForm.getRawValue());
+    this.bookingForm.reset({
+      roomId: '2',
+      guestEmail: '',
+      checkInDate: '',
+      checkOutDate: '',
+      bookingStatus: '',
+      bookingAmt: '',
+      bookingDate: '',
+      guestMobileNo: '',
+      guestName: '',
+      guestAddress: {
+        postalAddress: '',
+        zipCode: '',
+        city: ''
+      },
+      guests: [],
+      tnc: false
+    })
     
   }
 
@@ -53,6 +95,10 @@ export class BookingComponent implements OnInit {
       guestName: [''],
       age: ['']
     }))
+  }
+
+  removeGuest(i: number) {
+    this.guests.removeAt(i);
   }
 
 }
