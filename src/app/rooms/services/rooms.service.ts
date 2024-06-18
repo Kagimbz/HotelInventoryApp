@@ -44,7 +44,7 @@ export class RoomsService {
 
   constructor(private http: HttpClient) {
     console.log(`Rooms Service Initialized`);
-   }
+  }
 
   getRooms() {
     return this.http.get<RoomConfig[]>('/api/v1/hotel-inventory');
@@ -61,7 +61,7 @@ export class RoomsService {
   deleteRoom(roomNumber: number) {
     const params = new HttpParams().set('roomNumber', roomNumber);
 
-    return this.http.delete('/api/v1/hotel-inventory', {params});
+    return this.http.delete('/api/v1/hotel-inventory', { params });
   }
 }
 

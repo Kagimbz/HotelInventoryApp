@@ -40,20 +40,25 @@ export class BookingComponent implements OnInit {
         age: ['']
       })]),
       tnc: new FormControl(false, {validators: Validators.requiredTrue})
+    },
+    {
+      updateOn: 'blur'
     })
 
     this.getFormData();
+
+    this.bookingForm.valueChanges.subscribe((data) => {
+      console.log(data);
+    })
   }
 
   getFormData() {
-    this.bookingForm.setValue({
+    this.bookingForm.patchValue({
       roomId: '2',
       guestEmail: 'testemail@gmail.com',
       checkInDate: '',
       checkOutDate: '',
       bookingStatus: '',
-      bookingAmt: '',
-      bookingDate: '',
       guestMobileNo: '',
       guestName: 'Halima',
       guestAddress: {
