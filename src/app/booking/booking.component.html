@@ -1,15 +1,3 @@
-{{ bookingForm.value | json }}
-
-<!-- guestEmail: [''],
-      checkInDate: [''],
-      checkOutDate: [''],
-      bookingStatus: [''],
-      bookingAmt: [''],
-      bookingDate: [''],
-      guestMobileNo: [''],
-      guestName: [''],
-      guestAddress: [''],
-      guestCount: [''] -->
 <form [formGroup]="bookingForm" (ngSubmit)="addBooking()">
     <mat-form-field>
         <mat-label>Room Id</mat-label>
@@ -19,6 +7,7 @@
         <mat-label>Guest Name</mat-label>
         <input type="text" matInput formControlName="guestName" placeholder="Name" />
         <mat-error *ngIf="bookingForm.get('guestName')?.hasError('minlength')">Guest Name should be at least 5 characters!</mat-error>
+        <mat-error *ngIf="bookingForm.get('guestName')?.hasError('invalidName')">Guest Name should not include the characters 'test'!</mat-error>
     </mat-form-field>
     <mat-form-field>
         <mat-label>Guest Email</mat-label>

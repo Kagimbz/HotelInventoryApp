@@ -1,19 +1,19 @@
-<hotelinvapp-header></hotelinvapp-header>
-<h2>Welcome to {{hotelName}}!</h2>
+<!-- <hotelinvapp-header></hotelinvapp-header> -->
+<!-- <h2>Welcome to {{hotelName}}!</h2> -->
 
-<div [hidden]="hideRooms">
+<!-- <div [hidden]="hideRooms">
     Number Of Rooms:
     <div [innerText]="numberOfRooms" [ngStyle]="{'color': roomInfo.availableRooms ? 'green' : 'red'}">
     </div>
-</div>
+</div> -->
 
-<div *ngIf="errorAsObservable$ | async as error">
+<!-- <div *ngIf="errorAsObservable$ | async as error">
     {{ error }}
 </div>
 
 <div *ngIf="roomCount$ | async as roomCount">
     Number of rooms: {{ roomCount }}
-</div>
+</div> -->
 
 <div *ngIf="rooms$ | async as rooms">
     <hotelinvapp-rooms-list [rooms]="rooms" [title]="title" 
@@ -24,10 +24,10 @@
 <router-outlet/>
 
 <div>
-    <button routerLink="add">Add Room</button>
+    <button class="btn btn-success" routerLink="add">Add Room</button>
 </div>
 
-<button (click)="toggle()">Toggle</button>
+<!-- <button (click)="toggle()">Toggle</button>
 
 <div>
     <button (click)="updateRoom()">Update Room</button>
@@ -35,4 +35,4 @@
 
 <div>
     <button (click)="deleteRoom()">Delete Room</button>
-</div>
+</div> -->

@@ -7,4 +7,8 @@ import { Injectable } from '@angular/core';
 export class BookingService {
 
   constructor(private http: HttpClient) { }
+
+  bookRoom(booking: any) {
+    return this.http.post('https://jsonplaceholder.typicode.com/posts', booking);
+  }
 }

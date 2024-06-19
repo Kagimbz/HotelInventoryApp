@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../services/config.service';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { BookingService } from './booking.service';
+import { exhaustMap } from 'rxjs';
+import { CustomValidator } from './validators/custom-validator';
 
 @Component({
   selector: 'hotelinvapp-booking',
@@ -15,7 +18,7 @@ export class BookingComponent implements OnInit {
     return this.bookingForm.get('guests') as FormArray;
   }
 
-  constructor(private configService: ConfigService, private formBuilder: FormBuilder) {
+  constructor(private configService: ConfigService, private formBuilder: FormBuilder, private bookingService: BookingService) {
     console.log(configService);
   }
 
@@ -29,7 +32,7 @@ export class BookingComponent implements OnInit {
       bookingAmt: [''],
       bookingDate: [''],
       guestMobileNo: [''],
-      guestName: ['', [Validators.required, Validators.minLength(5)]],
+      guestName: ['', [Validators.required, Validators.minLength(5), CustomValidator.validateName]],
       guestAddress: this.formBuilder.group({
         postalAddress: ['', [Validators.required]],
         zipCode: [''],
@@ -47,9 +50,11 @@ export class BookingComponent implements OnInit {
 
     this.getFormData();
 
-    this.bookingForm.valueChanges.subscribe((data) => {
-      console.log(data);
-    })
+    this.bookingForm.valueChanges.pipe(
+      
+      exhaustMap((data) => this.bookingService.bookRoom(data))
+
+    ).subscribe((data) => console.log(data));
   }
 
   getFormData() {
@@ -74,6 +79,9 @@ export class BookingComponent implements OnInit {
 
   addBooking() {
     console.log(this.bookingForm.getRawValue());
+
+    // this.bookingService.bookRoom(this.bookingForm.getRawValue()).subscribe((data) => console.log(data));
+
     this.bookingForm.reset({
       roomId: '2',
       guestEmail: '',
