@@ -7,7 +7,7 @@
         <mat-label>Guest Name</mat-label>
         <input type="text" matInput formControlName="guestName" placeholder="Name" />
         <mat-error *ngIf="bookingForm.get('guestName')?.hasError('minlength')">Guest Name should be at least 5 characters!</mat-error>
-        <mat-error *ngIf="bookingForm.get('guestName')?.hasError('invalidName')">Guest Name should not include the characters 'test'!</mat-error>
+        <mat-error *ngIf="bookingForm.get('guestName')?.hasError('invalidName')">Invalid Name!</mat-error>
     </mat-form-field>
     <mat-form-field>
         <mat-label>Guest Email</mat-label>
