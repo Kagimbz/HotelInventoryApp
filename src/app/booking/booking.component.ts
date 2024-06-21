@@ -26,13 +26,13 @@ export class BookingComponent implements OnInit {
     this.bookingForm = this.formBuilder.group({
       roomId: new FormControl({value: '2', disabled: true}, {validators: [Validators.required]}),
       guestEmail: ['', [Validators.required, Validators.email]],
-      checkInDate: [''],
-      checkOutDate: [''],
+      checkInDate: ['', [Validators.required]],
+      checkOutDate: ['', [Validators.required]],
       bookingStatus: [''],
       bookingAmt: [''],
       bookingDate: [''],
       guestMobileNo: [''],
-      guestName: ['', [Validators.required, Validators.minLength(5), CustomValidator.validateName]],
+      guestName: ['', [Validators.required, Validators.minLength(5), CustomValidator.validateName, CustomValidator.validateCharacterPresence('@')]],
       guestAddress: this.formBuilder.group({
         postalAddress: ['', [Validators.required]],
         zipCode: [''],
@@ -45,7 +45,8 @@ export class BookingComponent implements OnInit {
       tnc: new FormControl(false, {validators: Validators.requiredTrue})
     },
     {
-      updateOn: 'blur'
+      updateOn: 'blur',
+      validators: [CustomValidator.validateDate]
     })
 
     this.getFormData();
