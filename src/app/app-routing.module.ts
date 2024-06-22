@@ -15,7 +15,7 @@ const routes: Routes = [
     // canMatch: [login2Guard]
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'booking', 
+  { path: 'booking/:roomId', 
     loadChildren: () => import('./booking/booking.module').then(m => m.BookingModule), 
     // canActivate: [loginGuard]
   },

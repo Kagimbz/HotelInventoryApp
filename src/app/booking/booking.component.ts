@@ -4,6 +4,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { BookingService } from './booking.service';
 import { exhaustMap } from 'rxjs';
 import { CustomValidator } from './validators/custom-validator';
+import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'hotelinvapp-booking',
@@ -18,13 +20,15 @@ export class BookingComponent implements OnInit {
     return this.bookingForm.get('guests') as FormArray;
   }
 
-  constructor(private configService: ConfigService, private formBuilder: FormBuilder, private bookingService: BookingService) {
+  constructor(private configService: ConfigService, private formBuilder: FormBuilder, private bookingService: BookingService, private route: ActivatedRoute) {
     console.log(configService);
   }
 
   ngOnInit(): void {
+    const roomId = this.route.snapshot.paramMap.get('roomId');
+
     this.bookingForm = this.formBuilder.group({
-      roomId: new FormControl({value: '2', disabled: true}, {validators: [Validators.required]}),
+      roomId: new FormControl({value: roomId, disabled: true}, {validators: [Validators.required]}),
       guestEmail: ['', [Validators.required, Validators.email]],
       checkInDate: ['', [Validators.required]],
       checkOutDate: ['', [Validators.required]],
@@ -60,7 +64,6 @@ export class BookingComponent implements OnInit {
 
   getFormData() {
     this.bookingForm.patchValue({
-      roomId: '2',
       guestEmail: 'testemail@gmail.com',
       checkInDate: '',
       checkOutDate: '',

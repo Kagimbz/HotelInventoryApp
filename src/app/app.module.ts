@@ -50,7 +50,7 @@ function initFactory(initService : InitService) {
     MatListModule,
     FormsModule,
     HeaderModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     {

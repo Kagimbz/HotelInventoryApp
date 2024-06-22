@@ -24,6 +24,7 @@ export class CustomValidator {
         const checkOutDate: any = new Date(control.get('checkOutDate')?.value);
         const diff = (checkOutDate - checkInDate)/(1000 * 60 * 60 * 24);
         if (diff < 0) {
+            control.get('checkOutDate')?.setErrors({ invalidDate: true })
             return { invalidDate: true }
         }
         return null;
