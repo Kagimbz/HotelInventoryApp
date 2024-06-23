@@ -15,8 +15,12 @@
     Number of rooms: {{ roomCount }}
 </div> -->
 
+<div>
+    <input type="number" placeholder="filter price" class="formControl" [formControl]="priceFilter" />
+</div>
+
 <div *ngIf="rooms$ | async as rooms">
-    <hotelinvapp-rooms-list [rooms]="rooms" [title]="title" 
+    <hotelinvapp-rooms-list [rooms]="rooms" [title]="title" [price]="priceFilter.value"
        (selectedRoom)="selectRoom($event)">
     </hotelinvapp-rooms-list>
 </div>
