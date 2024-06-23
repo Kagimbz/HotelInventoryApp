@@ -6,6 +6,7 @@ import { APP_CONFIG_TOKEN, AppConfig } from '../app_config/appconfig.service';
 import { LOCAL_STORAGE_TOKEN } from '../localstorage.token';
 import { Subject, Subscription, catchError, map, of } from 'rxjs';
 import { ConfigService } from '../services/config.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'hotelinvapp-rooms',
@@ -22,6 +23,8 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
     console.log(appConfigToken.apiUrl);
     console.log(configService);
   }
+
+  priceFilter: FormControl = new FormControl(0);
 
   subscription! : Subscription;
 

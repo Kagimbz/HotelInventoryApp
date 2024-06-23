@@ -5,11 +5,12 @@ import { RoomConfig } from '../room';
   selector: 'hotelinvapp-rooms-list',
   templateUrl: './rooms-list.component.html',
   styleUrl: './rooms-list.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoomsListComponent implements OnInit, OnChanges, OnDestroy{
   @Input() rooms: RoomConfig[] = [];
   @Input() title: string = '';
+  @Input() price: number = 0;
   @Output( ) selectedRoom = new EventEmitter<RoomConfig>();
 
   constructor(){ }
