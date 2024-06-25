@@ -6,7 +6,7 @@
         <th>Email</th>
     </tr>
 
-    <tr *ngFor="let comment of $comments | async">
+    <tr *ngFor="let comment of $commentsv2 | async">
         <td>{{ comment.postId }}</td>
         <td>{{ comment.id }}</td>
         <td>{{ comment.name }}</td>
