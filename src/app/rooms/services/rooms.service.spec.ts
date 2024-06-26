@@ -13,4 +13,10 @@ describe('RoomsService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should return 6 or more rooms', () => {
+    service.getRooms().subscribe(rooms => {
+      expect(rooms.length).toBeGreaterThanOrEqual(6);
+    })
+  });
 });

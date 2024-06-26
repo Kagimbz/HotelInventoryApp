@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +23,7 @@ import { HoverDirective } from './hover.directive';
 import { EmailvalidatorDirective } from './email_validator/emailvalidator.directive';
 import { HeaderModule } from './header/header.module';
 import { LINK_TOKEN, LINK_TOKEN_VALUE_1 } from './services/link-config.service';
+import { GlobalErrorHandler } from './error-handler.service';
 
 function initFactory(initService : InitService) {
   return () => initService.init();
@@ -71,7 +72,12 @@ function initFactory(initService : InitService) {
       useFactory: initFactory,
       deps: [InitService],
       multi: true
-    }, provideAnimationsAsync()
+    },
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler,
+    },
+     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })
