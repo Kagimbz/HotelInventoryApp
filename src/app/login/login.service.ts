@@ -11,12 +11,9 @@ export class LoginService {
   constructor() { }
 
   login(email: string, password: string) {
-    if(email === 'admin@gmail.com' && password === 'Admin') {
+    if (email.includes('@gmail.com') && password.length >= 4) {
       LoginService.isLoggedIn = true;
       this.isAdminLoggedIn = true;
-
-    } else if (email === 'user@gmail.com' && password === 'User') {
-      LoginService.isLoggedIn = true;
     }
   }
 }

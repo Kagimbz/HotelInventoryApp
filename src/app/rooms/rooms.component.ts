@@ -24,7 +24,7 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked, 
     console.log(configService);
   }
 
-  priceFilter: FormControl = new FormControl(0);
+  priceFilter: FormControl = new FormControl('');
 
   subscription! : Subscription;
 
