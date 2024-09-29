@@ -11,6 +11,6 @@ A simple Angular application for managing hotel rooms
   - Amenities provided (e.g., Wi-Fi, air conditioning, television)
 
 ## Backend Repository
-This frontend application interacts with a backend API. You can find the backend repository [here](https://github.com/your-backend-repo).
+This frontend application interacts with a backend API. You can find the backend repository [here](https://github.com/Kagimbz/HotelInventoryAppBackend.git).
 
 Make sure to set up both the frontend and backend for the full functionality of the application.
